@@ -106,8 +106,8 @@
                     {#each currentBoardData.posts as post (post.idx)}
                         <tr>
                             <td class="title">
-                                <a href="/board/{boardType}/{post.idx}">{post.title}</a>
-                            </td>
+                                <a href="/{currentBoardType}/{post.idx}">{post.title}</a>
+s                            </td>
                             <td class="date">{post.date}</td>
                         </tr>
                     {:else}
