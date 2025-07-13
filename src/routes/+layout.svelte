@@ -148,8 +148,8 @@
             {#if activeSubmenuIndex === 1}
             <ul class="submenu" transition:slide={{ duration: 300, easing: quintOut }}>
                 <li><a href="/contact" on:click={closeMenu}>문자수신등록</a></li>
-                <li><a href="/board?type=notice" on:click={closeMenu}>공지사항</a></li>
-                <li><a href="/board?type=recruit" on:click={closeMenu}>인재채용</a></li>
+                <li><a href="/notice" on:click={closeMenu}>공지사항</a></li>
+                <li><a href="/recruit" on:click={closeMenu}>인재채용</a></li>
             </ul>
             {/if}
         </li>
