@@ -3,6 +3,7 @@
     import { page } from '$app/stores'; // SvelteKit 2.x에서는 $app/stores가 맞습니다. (Svelte 5에서도 작동)
     import { quintOut } from 'svelte/easing';
     import { slide } from 'svelte/transition'; // 아코디언 슬라이드 트랜지션
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!
 
     // Hero 섹션 배경 이미지 (src/lib/assets/schedule_hero_bg.jpg로 가정)
     // 이 파일이 `src/lib/assets/schedule_hero_bg.jpg`에 있는지 확인해주세요.
@@ -142,10 +143,10 @@
         <h2>새움학원 시간표</h2>
         <nav class="grade-nav">
             <ul>
-                <li class:active={currentGrade === 'g1'}><a href="/schedule?grade=g1" onclick={(e) => { e.preventDefault(); currentGrade = 'g1'; $page.url.searchParams.set('grade', 'g1'); }}>고1</a></li>
-                <li class:active={currentGrade === 'g2'}><a href="/schedule?grade=g2" onclick={(e) => { e.preventDefault(); currentGrade = 'g2'; $page.url.searchParams.set('grade', 'g2'); }}>고2</a></li>
-                <li class:active={currentGrade === 'g3'}><a href="/schedule?grade=g3" onclick={(e) => { e.preventDefault(); currentGrade = 'g3'; $page.url.searchParams.set('grade', 'g3'); }}>고3</a></li>
-                <li class:active={currentGrade === 'm3'}><a href="/schedule?grade=m3" onclick={(e) => { e.preventDefault(); currentGrade = 'm3'; $page.url.searchParams.set('grade', 'm3'); }}>중3</a></li>
+                <li class:active={currentGrade === 'g1'}><a href="{base}/schedule?grade=g1" onclick={(e) => { e.preventDefault(); currentGrade = 'g1'; $page.url.searchParams.set('grade', 'g1'); }}>고1</a></li>
+                <li class:active={currentGrade === 'g2'}><a href="{base}/schedule?grade=g2" onclick={(e) => { e.preventDefault(); currentGrade = 'g2'; $page.url.searchParams.set('grade', 'g2'); }}>고2</a></li>
+                <li class:active={currentGrade === 'g3'}><a href="{base}/schedule?grade=g3" onclick={(e) => { e.preventDefault(); currentGrade = 'g3'; $page.url.searchParams.set('grade', 'g3'); }}>고3</a></li>
+                <li class:active={currentGrade === 'm3'}><a href="{base}/schedule?grade=m3" onclick={(e) => { e.preventDefault(); currentGrade = 'm3'; $page.url.searchParams.set('grade', 'm3'); }}>중3</a></li>
             </ul>
         </nav>
     </aside>

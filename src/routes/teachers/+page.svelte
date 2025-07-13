@@ -3,6 +3,7 @@
     import { quintOut } from 'svelte/easing'; // 이징 함수
     import { slide } from 'svelte/transition'; // Svelte 트랜지션
     import { page } from '$app/stores'; // SvelteKit page store
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!s
 
     // 페이지 히어로 배경 이미지 (assets/teachers_hero_bg.jpg로 가정)
     import TeachersHeroBg from '$lib/images/teachers_hero_bg.jpg'; // <-- 실제 이미지 경로로 수정
@@ -166,7 +167,7 @@
     <div class="teacher-grid">
         {#each filteredTeachers as teacher (teacher.id)}
             <div class="teacher-card">
-                <a href="/teachers/{teacher.id}">
+                <a href="{base}/teachers/{teacher.id}">
                     <div class="img-wrap">
                         <img src="{teacher.image}" alt="{teacher.name} 강사" onerror={handleImageError}>
                     </div>

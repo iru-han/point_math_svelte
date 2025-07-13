@@ -8,6 +8,7 @@
 
     // 이미지 로드 에러 처리 함수 임포트
     import { handleImageError } from '$lib/utils/imageUtils';
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!
 
     // GSAP 관련 변수
     let gsap: any;
@@ -91,20 +92,20 @@
             </div>
             <div class="post-nav">
                 {#if nextPost}
-                    <a href="/{boardType}/{nextPost.idx}" class="nav-item">
+                    <a href="{base}/{boardType}/{nextPost.idx}" class="nav-item">
                         <span class="nav-label">다음글</span>
                         <span class="nav-title">{nextPost.title}</span>
                     </a>
                 {/if}
                 {#if prevPost}
-                    <a href="/{boardType}/{prevPost.idx}" class="nav-item">
+                    <a href="{base}/{boardType}/{prevPost.idx}" class="nav-item">
                         <span class="nav-label">이전글</span>
                         <span class="nav-title">{prevPost.title}</span>
                     </a>
                 {/if}
             </div>
             <div class="list-button-wrap">
-                <a href="/{boardType}" class="list-button">목록</a>
+                <a href="{base}/{boardType}" class="list-button">목록</a>
             </div>
         {:else}
             <div class="post-header">
@@ -112,7 +113,7 @@
                 <p>요청하신 게시글의 정보가 없거나, URL이 올바르지 않습니다.</p>
             </div>
             <div class="list-button-wrap">
-                <a href="/notice" class="list-button">공지사항 목록으로 돌아가기</a>
+                <a href="{base}/notice" class="list-button">공지사항 목록으로 돌아가기</a>
             </div>
         {/if}
     </div>

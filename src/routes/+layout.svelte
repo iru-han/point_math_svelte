@@ -10,6 +10,8 @@
     // 로고 이미지 임포트: 정확한 경로와 파일명으로 수정 (assets/logo.png로 가정)
     import LogoImage from '$lib/images/logo.jpg'; // <-- 정확한 경로 확인 후 수정
 
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!
+
     // Svelte 5 $props()는 layout 컴포넌트에서 필요 없습니다.
     let { children } = $props(); // 이 줄은 삭제합니다.
 
@@ -121,7 +123,7 @@
         </button>
 
         <div class="logo">
-            <a href="/"><img src={LogoImage} alt="SAEUM 로고"></a> </div>
+            <a href="{base}/"><img src={LogoImage} alt="SAEUM 로고"></a> </div>
 
         <div style="width: 45px;"></div>
     </div>
@@ -134,26 +136,26 @@
             <a href="{'#'}" onclick={(e) => { e.preventDefault(); toggleSubmenu(0); }}>시간표 <span class="arrow-icon"></span></a>
             {#if activeSubmenuIndex === 0}
             <ul class="submenu" transition:slide={{ duration: 300, easing: quintOut }}>
-                <li><a href="/schedule?grade=g1" onclick={closeMenu}>고1</a></li>
-                <li><a href="/schedule?grade=g2" onclick={closeMenu}>고2</a></li>
-                <li><a href="/schedule?grade=g3" onclick={closeMenu}>고3</a></li>
-                <li><a href="/schedule?grade=m3" onclick={closeMenu}>중3</a></li>
+                <li><a href="{base}/schedule?grade=g1" onclick={closeMenu}>고1</a></li>
+                <li><a href="{base}/schedule?grade=g2" onclick={closeMenu}>고2</a></li>
+                <li><a href="{base}/schedule?grade=g3" onclick={closeMenu}>고3</a></li>
+                <li><a href="{base}/schedule?grade=m3" onclick={closeMenu}>중3</a></li>
             </ul>
             {/if}
         </li>
-        <li class="menu-item"><a href="/seminar" onclick={closeMenu}>설명회</a></li>
-        <li class="menu-item"><a href="/teachers" onclick={closeMenu}>새움강사진</a></li>
+        <li class="menu-item"><a href="{base}/seminar" onclick={closeMenu}>설명회</a></li>
+        <li class="menu-item"><a href="{base}/teachers" onclick={closeMenu}>새움강사진</a></li>
         <li class="menu-item has-submenu" class:active={activeSubmenuIndex === 1}>
             <a href="#" onclick={(e) => { e.preventDefault(); toggleSubmenu(1); }}>커뮤니티 <span class="arrow-icon"></span></a>
             {#if activeSubmenuIndex === 1}
             <ul class="submenu" transition:slide={{ duration: 300, easing: quintOut }}>
-                <li><a href="/contact" onclick={closeMenu}>문자수신등록</a></li>
-                <li><a href="/notice" onclick={closeMenu}>공지사항</a></li>
-                <li><a href="/recruit" onclick={closeMenu}>인재채용</a></li>
+                <li><a href="{base}/contact" onclick={closeMenu}>문자수신등록</a></li>
+                <li><a href="{base}/notice" onclick={closeMenu}>공지사항</a></li>
+                <li><a href="{base}/recruit" onclick={closeMenu}>인재채용</a></li>
             </ul>
             {/if}
         </li>
-        <li class="menu-item"><a href="/location" onclick={closeMenu}>오시는 길</a></li>
+        <li class="menu-item"><a href="{base}/location" onclick={closeMenu}>오시는 길</a></li>
     </ul>
 </nav>
 

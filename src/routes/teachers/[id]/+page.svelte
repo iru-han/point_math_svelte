@@ -2,6 +2,7 @@
     import { onMount, onDestroy } from 'svelte';
     import { page } from '$app/stores'; // SvelteKit page store
     import { quintOut } from 'svelte/easing'; // 이징 함수
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!s
 
     // 강사 데이터 임포트 (src/routes/teachers/teacherData.ts 파일로 분리하는 것을 권장)
     // 현재는 src/routes/teachers/+page.svelte에 정의된 allTeachers 데이터를 가져온다고 가정합니다.
@@ -136,7 +137,7 @@
 
         <div class="detail-nav">
             {#if nextTeacher}
-            <a href="/teachers/{nextTeacher.id}" class="nav-item">
+            <a href="{base}/teachers/{nextTeacher.id}" class="nav-item">
                 <div class="nav-item-title">
                     <span class="nav-arrow">ᐱ</span>
                     <span class="nav-text">다음 강사</span>
@@ -146,7 +147,7 @@
             {/if}
 
             {#if prevTeacher}
-            <a href="/teachers/{prevTeacher.id}" class="nav-item">
+            <a href="{base}/teachers/{prevTeacher.id}" class="nav-item">
                 <div class="nav-item-title">
                     <span class="nav-arrow">ᐯ</span>
                     <span class="nav-text">이전 강사</span>
@@ -157,13 +158,13 @@
         </div>
 
         <div class="list-button-wrap">
-            <a href="/teachers" class="list-button">목록</a>
+            <a href="{base}/teachers" class="list-button">목록</a>
         </div>
     {:else}
         <div class="detail-container">
             <h2>강사 정보를 찾을 수 없습니다.</h2>
             <div class="list-button-wrap" style="text-align:center;">
-                <a href="/teachers" class="list-button">목록으로 돌아가기</a>
+                <a href="{base}/teachers" class="list-button">목록으로 돌아가기</a>
             </div>
         </div>
     {/if}
