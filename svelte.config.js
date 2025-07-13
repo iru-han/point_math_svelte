@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path from 'path'; // <-- 이 줄을 추가합니다!
 
@@ -18,10 +19,11 @@ const config = {
     }),
 
     kit: {
-        adapter: adapter(),
+		adapter: adapter({
+			fallback: '404.html'
+		}),
         paths: { // GitHub Pages에 배포할 때 중요한 부분!
-            base: process.env.NODE_ENV === 'production' ? '/point_math_svelte' : '', // 프로덕션 환경에서만 기본 경로 설정
-                                                                               // '당신의-저장소-이름'을 실제 GitHub 저장소 이름으로 변경
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
         },
         alias: {
             '@': path.resolve('./src')
