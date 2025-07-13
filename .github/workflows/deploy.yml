@@ -5,16 +5,15 @@ name: Deploy SvelteKit to GitHub Pages
 on:
   push:
     branches:
-      - main # main 브랜치에 푸시될 때 워크플로우 실행
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: write # 저장소 콘텐츠에 쓰기 권한 부여
-      pages: write    # GitHub Pages 배포를 위한 권한 (새 브랜치 생성 권한 포함)
-      id-token: write # OIDC를 위한 권한 (Actions에서 Pages 설정 시 필요)
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -31,6 +30,17 @@ jobs:
 
       - name: Build SvelteKit application
         run: npm run build
+
+      - name: Verify build directory contents # <-- 이 단계를 추가합니다!
+        run: |
+          ls -R ./build # build 폴더와 그 안의 내용물을 재귀적으로 모두 나열
+          if [ -d "./build" ]; then # build 폴더가 존재하는지 확인
+            echo "::notice::Build directory exists and contains files:"
+            ls -al ./build
+          else
+            echo "::error::Build directory was NOT created!" # build 폴더가 없으면 에러 발생
+            exit 1 # 워크플로우 실패
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
