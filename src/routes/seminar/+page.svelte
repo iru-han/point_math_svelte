@@ -185,7 +185,7 @@
         </div>
 
         <div class="search-container">
-            <input type="text" class="schedule-search-input" placeholder="설명회명으로 검색..." on:input={handleSearch} bind:value={searchQuery}>
+            <input type="text" class="schedule-search-input" placeholder="설명회명으로 검색..." oninput={handleSearch} bind:value={searchQuery}>
             <button class="write-button common-button" onclick={handleWriteButtonClick}>글쓰기</button>
         </div>
     </section>
