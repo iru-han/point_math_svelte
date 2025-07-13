@@ -32,12 +32,14 @@
         activeSubmenuIndex = null;
     }
 
+    // 아코디언 메뉴 토글 함수
     function toggleSubmenu(index: number): void {
         if (activeSubmenuIndex === index) {
-            activeSubmenuIndex = null;
+            activeSubmenuIndex = null; // 이미 열려있으면 닫기
         } else {
-            activeSubmenuIndex = index;
+            activeSubmenuIndex = index; // 새 메뉴 열기
         }
+		console.log(`Submenu ${index} toggled. Active index: ${activeSubmenuIndex}`);
     }
 
     function handleScroll(): void {
@@ -250,7 +252,7 @@
     }
     .accordion-menu .submenu {
         list-style: none; padding-left: 20px; background-color: #f9f9f9; // 변수 사용 고려
-        max-height: 0; overflow: hidden;
+        // max-height: 0; overflow: hidden;
     }
     .accordion-menu .submenu a { 
 		font-size: 15px; color: #555; // 변수 사용 고려 
