@@ -67,9 +67,22 @@
         submissionMessage = '제출 중...';
         isSuccess = false;
 
-        const result = await event.update();
+        // 폼 데이터를 직접 fetch로 제출
+        let result: any;
+        try {
+            const response = await fetch(event.action, {
+                method: 'POST',
+                body: event.formData,
+                headers: {
+                    'accept': 'application/json'
+                }
+            });
+            const data = await response.json();
+            result = { status: response.status, data };
+        } catch (error) {
+            result = { status: 500, data: { message: '서버와 통신 중 오류가 발생했습니다.' } };
+        }
 
-        // update() 이후 result가 최신 상태로 반영됨
         if (result?.data && result.status === 200) {
             submissionMessage = result.data.message || '문자 수신 등록이 완료되었습니다!';
             isSuccess = true;
