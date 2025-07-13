@@ -1,0 +1,1 @@
+import{N as r}from"./DfYjUK_g.js";function t(e){const o=e.target;if(console.log("Image load error detected for:",o.src),console.log("Attempting to set fallback to:",r),o.src===r){o.onerror=null,console.log("Already using fallback, stopping.");return}o.src=r,o.onerror=null}export{t as h};
