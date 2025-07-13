@@ -45,7 +45,7 @@
             scrollTrigger: {
                 trigger: ".intro-section",
                 start: "top 20%",
-                markers: true
+                // markers: true
             }
         });
 
