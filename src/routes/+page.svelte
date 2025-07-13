@@ -11,6 +11,7 @@
     // GSAP 및 ScrollTrigger도 여기서 임포트하는 것이 좋습니다.
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import PageHero from '@/lib/components/PageHero.svelte';
 
     // GSAP 플러그인 등록
     gsap.registerPlugin(ScrollTrigger);
@@ -43,7 +44,7 @@
             opacity: 0, y: 50, duration: 0.8, stagger: 0.1,
             scrollTrigger: {
                 trigger: ".intro-section",
-                start: "top 80%",
+                start: "top 20%",
                 markers: true
             }
         });
@@ -51,25 +52,25 @@
         // Teachers Section
         gsap.from(".teachers-section .section-text, .teachers-slider, .teachers-section .common-button", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.2,
-            scrollTrigger: { trigger: ".teachers-section", start: "top 80%", markers: true }
+            scrollTrigger: { trigger: ".teachers-section", start: "top 50%", markers: true }
         });
 
         // Seminar Section
         gsap.from(".seminar-card", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: ".seminar-cta-section", start: "top 80%", markers: true }
+            scrollTrigger: { trigger: ".seminar-cta-section", start: "top 50%", markers: true }
         });
 
         // Final CTA Section
         gsap.from(".final-cta-section .stats-box, .final-cta-section .common-button", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.2,
-            scrollTrigger: { trigger: ".final-cta-section", start: "top 80%", markers: true }
+            scrollTrigger: { trigger: ".final-cta-section", start: "top 50%", markers: true }
         });
 
         // Footer
         gsap.from("footer .footer-logo, footer .footer-divider, footer .footer-content, footer .copyright", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: "footer", start: "top 80%", markers: true }
+            scrollTrigger: { trigger: "footer", start: "top 50%", markers: true }
         });
 
         console.log("Page: GSAP ScrollTriggers defined.");
@@ -100,11 +101,7 @@
 	
 </script>
 
-<section class="hero-section" style="--hero-bg-url: url('{HeroBgImage}')"> <div class="hero-content">
-        <h1>Possibility Becomes Reality</h1>
-        <p>미래를 세우는 기둥, 새움에서 시작됩니다.</p>
-    </div>
-</section>
+<PageHero title="" backgroundImage={HeroBgImage} />
 
 <section class="intro-section">
     <div class="section-container">
@@ -284,13 +281,13 @@
         gap: 30px;
         max-width: 1200px;
         margin: 0 auto;
-        overflow-x: auto;
+        // overflow-x: auto;
         padding-bottom: 10px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         &::-webkit-scrollbar { display: none; }
 
-        .info-card:nth-child(odd) { margin-top: 0; }
+        .info-card:nth-child(odd) { margin-bottom: 50px; }
         .info-card:nth-child(even) { margin-top: 50px; }
     }
 
