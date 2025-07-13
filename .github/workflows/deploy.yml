@@ -9,30 +9,32 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Ubuntu 환경에서 실행
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # 저장소 콘텐츠에 쓰기 권한 부여
+      pages: write    # GitHub Pages 배포를 위한 권한 (새 브랜치 생성 권한 포함)
+      id-token: write # OIDC를 위한 권한 (Actions에서 Pages 설정 시 필요)
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # 저장소 코드 가져오기
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # SvelteKit 빌드에 필요한 Node.js 버전 (20 LTS 또는 22 LTS)
-          cache: 'npm' # npm 캐시 사용 (설치 시간 단축)
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --force # 모든 의존성 설치 (Svelte 5 사용 시 --force 필요)
+        run: npm install --force
 
       - name: Build SvelteKit application
-        run: npm run build # SvelteKit 프로젝트 빌드
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3 # GitHub Pages에 배포하는 액션 사용
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub에서 제공하는 토큰
-          publish_dir: ./build # SvelteKit 빌드 결과물 폴더
-          publish_branch: gh-pages # 배포할 브랜치 (보통 'gh-pages' 브랜치에 배포)
-          cname: '' # 커스텀 도메인을 사용하지 않는다면 비워둡니다 (루트 도메인).
-                    # 만약 your_username.github.io 에 배포한다면 비워둡니다.
-                    # 서브디렉토리 배포 (your_username.github.io/your_repo)라면 비워둡니다.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
