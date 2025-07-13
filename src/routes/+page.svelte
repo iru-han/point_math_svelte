@@ -81,8 +81,21 @@
             teachersSwiperInstance = null;
         }
         // ScrollTrigger 인스턴스 정리 (필요시)
-        ScrollTrigger.getAll().forEach(st => st.kill());
+        // ScrollTrigger.getAll().forEach(st => st.kill());
+
+        // ScrollTrigger 인스턴스가 있다면 모든 트리거를 kill()합니다.
+        // ScrollTrigger.clear()는 제거합니다.
+        if ((window as any).ScrollTrigger) {
+            (window as any).ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
+            console.log("Layout: All ScrollTriggers killed.");
+        }
+        // GSAP 트윈 정리 (killTweensOf("*")는 모든 활성 트윈을 종료)
+        if ((window as any).gsap) {
+            (window as any).gsap.killTweensOf("*");
+            console.log("Layout: GSAP tweens killed.");
+        }
     });
+	
 </script>
 
 <section class="hero-section" style="--hero-bg-url: url('{HeroBgImage}')"> <div class="hero-content">
