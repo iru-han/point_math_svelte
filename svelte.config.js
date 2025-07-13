@@ -23,7 +23,7 @@ const config = {
 			fallback: '404.html'
 		}),
         paths: { // GitHub Pages에 배포할 때 중요한 부분!
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+            base: process.env.NODE_ENV === 'production' ? '/point_math_svelte' : '',
         },
         alias: {
             '@': path.resolve('./src')
