@@ -8,6 +8,10 @@
     import TeachersHeroBg from '$lib/images/teachers_hero_bg.jpg'; // <-- 실제 이미지 경로로 수정
     import NoImage from '$lib/images/no-image.png'; // <-- 이 줄을 추가합니다.
 
+    // imageUtils.ts 파일에서 handleImageError 함수 임포트
+    import { handleImageError } from '$lib/utils/imageUtils'; // <-- 이 줄을 추가합니다.
+
+
     // GSAP 관련 변수 (+layout.svelte에서 전역 할당되므로 여기서 import하지 않습니다.)
     let gsap: any;
     let ScrollTrigger: any;
@@ -164,7 +168,7 @@
             <div class="teacher-card">
                 <a href="/teachers/{teacher.id}">
                     <div class="img-wrap">
-                        <img src="{teacher.image}" alt="{teacher.name} 강사" on:error={(e) => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = NoImage; }}>
+                        <img src="{teacher.image}" alt="{teacher.name} 강사" on:error={handleImageError}>
                     </div>
                     <h4>{teacher.name}</h4>
                     <p>[{teacher.subject}]</p>

@@ -1,20 +1,20 @@
-// src/routes/teachers/+page.svelte (스크립트 부분)
+// src/routes/teachers/teachersData.ts
 
-// 인터페이스 정의
-interface TeacherItem {
+// 인터페이스도 export 해야 다른 파일에서 사용할 수 있습니다.
+export interface TeacherItem { // <-- export 추가
     id: string;
     name: string;
     subject: string;
     image: string;
-    category: string; // 'kor', 'eng', 'math' 등
-    career: string[]; // 학력/약력
-    lectures: string[]; // 출강 정보
-    videoId?: string; // 유튜브 영상 주소의 ID 부분 (선택 사항)
-    timetableImage?: string; // 시간표 이미지 주소 (선택 사항)
+    category: string;
+    career: string[];
+    lectures: string[];
+    videoId?: string;
+    timetableImage?: string;
 }
 
-// 강사 데이터 (teacher-data.js 내용)
-const allTeachers: TeacherItem[] = [
+// 강사 데이터 배열도 export 해야 합니다.
+export const allTeachers: TeacherItem[] = [ // <-- export 추가
     {
         id: 'kang-jeong-hwa',
         name: '강정화',
@@ -37,7 +37,6 @@ const allTeachers: TeacherItem[] = [
         videoId: 'yq0G26vIu3Q',
         timetableImage: 'https://i.imgur.com/B7ODxLS.png'
     },
-    // ... 다른 강사 데이터도 여기에 추가 ...
     {
         id: 'yoo-joo-oh',
         name: '유주오',
@@ -62,11 +61,10 @@ const allTeachers: TeacherItem[] = [
     }
 ];
 
-// 카테고리 데이터 (subject를 기반으로 자동 생성)
-const categories = [
+// 카테고리 데이터도 export 합니다.
+export const categories = [ // <-- export 추가
     { name: '전체', filter: 'all' },
     { name: '국어', filter: 'kor' },
     { name: '영어', filter: 'eng' },
     { name: '수학', filter: 'math' }
-    // 필요에 따라 다른 과목 추가
 ];
