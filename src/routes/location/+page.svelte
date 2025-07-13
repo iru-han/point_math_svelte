@@ -108,7 +108,7 @@
             <ul>
                 {#each Object.entries(locationData) as [id, locItem]}
                     <li class="menu-item" class:active={currentCampusId === id}>
-                        <a href="/location?id={id}" on:click|preventDefault={() => currentCampusId = id}>{locItem.name}</a>
+                        <a href="/location?id={id}" onclick={(e) => {e.preventDefault(); currentCampusId = id}}>{locItem.name}</a>
                     </li>
                 {/each}
             </ul>

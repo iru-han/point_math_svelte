@@ -85,15 +85,17 @@
 
         // ScrollTrigger 인스턴스가 있다면 모든 트리거를 kill()합니다.
         // ScrollTrigger.clear()는 제거합니다.
-        if ((window as any).ScrollTrigger) {
-            (window as any).ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
-            console.log("Layout: All ScrollTriggers killed.");
-        }
-        // GSAP 트윈 정리 (killTweensOf("*")는 모든 활성 트윈을 종료)
-        if ((window as any).gsap) {
-            (window as any).gsap.killTweensOf("*");
-            console.log("Layout: GSAP tweens killed.");
-        }
+		if (typeof window !== 'undefined') {
+			if ((window as any).ScrollTrigger) {
+				(window as any).ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
+				console.log("Layout: All ScrollTriggers killed.");
+			}
+			// GSAP 트윈 정리 (killTweensOf("*")는 모든 활성 트윈을 종료)
+			if ((window as any).gsap) {
+				(window as any).gsap.killTweensOf("*");
+				console.log("Layout: GSAP tweens killed.");
+			}
+		}
     });
 	
 </script>
@@ -357,7 +359,9 @@
         background-color: $primary-color;
         color: $white;
         border-radius: 5px; font-size: 1.1em; transition: background-color 0.3s ease;
-        &:hover { background-color: darken($primary-color, 10%); }
+        &:hover { 
+			background-color: darken($primary-color, 10%); 
+		}
     }
 
     // --- Seminar CTA Section ---

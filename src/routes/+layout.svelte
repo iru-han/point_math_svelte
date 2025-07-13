@@ -114,7 +114,7 @@
 
 <header class="site-header" class:scrolled={isHeaderScrolled}>
     <div class="header-container">
-        <button class="menu-trigger" class:is-active={isMenuOpen} on:click={toggleMenu}>
+        <button class="menu-trigger" class:is-active={isMenuOpen} onclick={toggleMenu} aria-label="메뉴 열기 또는 닫기">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
@@ -129,35 +129,35 @@
 
 <nav class="slide-nav-panel" class:is-open={isMenuOpen}>
     <ul class="accordion-menu">
-        <li class="menu-item"><a href="/" on:click={closeMenu}>새움학원</a></li>
+        <li class="menu-item"><a href="/" onclick={closeMenu}>새움학원</a></li>
         <li class="menu-item has-submenu" class:active={activeSubmenuIndex === 0}>
-            <a href="#" on:click={(e) => { e.preventDefault(); toggleSubmenu(0); }}>시간표 <span class="arrow-icon"></span></a>
+            <a href="{'#'}" onclick={(e) => { e.preventDefault(); toggleSubmenu(0); }}>시간표 <span class="arrow-icon"></span></a>
             {#if activeSubmenuIndex === 0}
             <ul class="submenu" transition:slide={{ duration: 300, easing: quintOut }}>
-                <li><a href="/schedule?grade=g1" on:click={closeMenu}>고1</a></li>
-                <li><a href="/schedule?grade=g2" on:click={closeMenu}>고2</a></li>
-                <li><a href="/schedule?grade=g3" on:click={closeMenu}>고3</a></li>
-                <li><a href="/schedule?grade=m3" on:click={closeMenu}>중3</a></li>
+                <li><a href="/schedule?grade=g1" onclick={closeMenu}>고1</a></li>
+                <li><a href="/schedule?grade=g2" onclick={closeMenu}>고2</a></li>
+                <li><a href="/schedule?grade=g3" onclick={closeMenu}>고3</a></li>
+                <li><a href="/schedule?grade=m3" onclick={closeMenu}>중3</a></li>
             </ul>
             {/if}
         </li>
-        <li class="menu-item"><a href="/seminar" on:click={closeMenu}>설명회</a></li>
-        <li class="menu-item"><a href="/teachers" on:click={closeMenu}>새움강사진</a></li>
+        <li class="menu-item"><a href="/seminar" onclick={closeMenu}>설명회</a></li>
+        <li class="menu-item"><a href="/teachers" onclick={closeMenu}>새움강사진</a></li>
         <li class="menu-item has-submenu" class:active={activeSubmenuIndex === 1}>
-            <a href="#" on:click={(e) => { e.preventDefault(); toggleSubmenu(1); }}>커뮤니티 <span class="arrow-icon"></span></a>
+            <a href="#" onclick={(e) => { e.preventDefault(); toggleSubmenu(1); }}>커뮤니티 <span class="arrow-icon"></span></a>
             {#if activeSubmenuIndex === 1}
             <ul class="submenu" transition:slide={{ duration: 300, easing: quintOut }}>
-                <li><a href="/contact" on:click={closeMenu}>문자수신등록</a></li>
-                <li><a href="/notice" on:click={closeMenu}>공지사항</a></li>
-                <li><a href="/recruit" on:click={closeMenu}>인재채용</a></li>
+                <li><a href="/contact" onclick={closeMenu}>문자수신등록</a></li>
+                <li><a href="/notice" onclick={closeMenu}>공지사항</a></li>
+                <li><a href="/recruit" onclick={closeMenu}>인재채용</a></li>
             </ul>
             {/if}
         </li>
-        <li class="menu-item"><a href="/location" on:click={closeMenu}>오시는 길</a></li>
+        <li class="menu-item"><a href="/location" onclick={closeMenu}>오시는 길</a></li>
     </ul>
 </nav>
 
-<div class="overlay" class:is-active={isMenuOpen} on:click={closeMenu}></div>
+<div class="overlay" class:is-active={isMenuOpen} onclick={closeMenu}></div>
 
 <main>
     {@render children()}

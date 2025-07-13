@@ -142,10 +142,10 @@
         <h2>새움학원 시간표</h2>
         <nav class="grade-nav">
             <ul>
-                <li class:active={currentGrade === 'g1'}><a href="/schedule?grade=g1" on:click|preventDefault={() => { currentGrade = 'g1'; $page.url.searchParams.set('grade', 'g1'); }}>고1</a></li>
-                <li class:active={currentGrade === 'g2'}><a href="/schedule?grade=g2" on:click|preventDefault={() => { currentGrade = 'g2'; $page.url.searchParams.set('grade', 'g2'); }}>고2</a></li>
-                <li class:active={currentGrade === 'g3'}><a href="/schedule?grade=g3" on:click|preventDefault={() => { currentGrade = 'g3'; $page.url.searchParams.set('grade', 'g3'); }}>고3</a></li>
-                <li class:active={currentGrade === 'm3'}><a href="/schedule?grade=m3" on:click|preventDefault={() => { currentGrade = 'm3'; $page.url.searchParams.set('grade', 'm3'); }}>중3</a></li>
+                <li class:active={currentGrade === 'g1'}><a href="/schedule?grade=g1" onclick={(e) => { e.preventDefault(); currentGrade = 'g1'; $page.url.searchParams.set('grade', 'g1'); }}>고1</a></li>
+                <li class:active={currentGrade === 'g2'}><a href="/schedule?grade=g2" onclick={(e) => { e.preventDefault(); currentGrade = 'g2'; $page.url.searchParams.set('grade', 'g2'); }}>고2</a></li>
+                <li class:active={currentGrade === 'g3'}><a href="/schedule?grade=g3" onclick={(e) => { e.preventDefault(); currentGrade = 'g3'; $page.url.searchParams.set('grade', 'g3'); }}>고3</a></li>
+                <li class:active={currentGrade === 'm3'}><a href="/schedule?grade=m3" onclick={(e) => { e.preventDefault(); currentGrade = 'm3'; $page.url.searchParams.set('grade', 'm3'); }}>중3</a></li>
             </ul>
         </nav>
     </aside>
@@ -154,7 +154,7 @@
         <nav class="category-nav">
             {#if currentGradeData}
                 {#each currentGradeData.categories as category (category.filter)}
-                    <a href="#" class="category-link" class:active={currentCategory === category.filter} on:click|preventDefault={() => setCategory(category.filter)}>{category.name}</a>
+                    <a href="#" class="category-link" class:active={currentCategory === category.filter} onclick={(e) => { e.preventDefault(); setCategory(category.filter); }}>{category.name}</a>
                 {/each}
             {:else}
                 <a href="#" class="category-link active">카테고리 없음</a>
@@ -164,7 +164,7 @@
         <div class="accordion-list">
             {#each filteredSchedules as item, index (item.title + index)}
                 <div class="accordion-item" class:active={activeAccordionItem === index}>
-                    <div class="accordion-header" on:click={() => toggleAccordion(index)}>
+                    <div class="accordion-header" onclick={() => toggleAccordion(index)}>
                         <span class="accordion-title">{item.title}</span>
                         <span class="accordion-arrow"></span>
                     </div>
@@ -180,7 +180,7 @@
         </div>
 
         <div class="search-container">
-            <input type="text" class="schedule-search-input" placeholder="강의명으로 검색..." on:input={handleSearch} bind:value={searchQuery}>
+            <input type="text" class="schedule-search-input" placeholder="강의명으로 검색..." oninput={handleSearch} bind:value={searchQuery}>
         </div>
     </section>
 </div>

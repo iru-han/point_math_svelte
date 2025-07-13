@@ -159,7 +159,7 @@
 <div class="page-container">
     <nav class="category-nav">
         {#each categories as category (category.filter)}
-            <a href="#" class="category-link" class:active={currentCategory === category.filter} on:click|preventDefault={() => setCategory(category.filter)}>{category.name}</a>
+            <a href="#" class="category-link" class:active={currentCategory === category.filter} onclick={(e) => { e.preventDefault(); setCategory(category.filter) }}>{category.name}</a>
         {/each}
     </nav>
 
@@ -168,7 +168,7 @@
             <div class="teacher-card">
                 <a href="/teachers/{teacher.id}">
                     <div class="img-wrap">
-                        <img src="{teacher.image}" alt="{teacher.name} 강사" on:error={handleImageError}>
+                        <img src="{teacher.image}" alt="{teacher.name} 강사" onerror={handleImageError}>
                     </div>
                     <h4>{teacher.name}</h4>
                     <p>[{teacher.subject}]</p>
