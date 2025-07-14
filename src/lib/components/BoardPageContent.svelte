@@ -107,6 +107,7 @@
                         <tr>
                             <td class="title">
                                 <a href="/{currentBoardType}/{post.idx}">{post.title}</a>
+                                <!-- <a href="https://blog.naver.com/psj760810" target="_blank">{post.title}</a> -->
 s                            </td>
                             <td class="date">{post.date}</td>
                         </tr>
