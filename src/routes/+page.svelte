@@ -52,25 +52,25 @@
         // Teachers Section
         gsap.from(".teachers-section .section-text, .teachers-slider, .teachers-section .common-button", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.2,
-            scrollTrigger: { trigger: ".teachers-section", start: "top 50%", markers: true }
+            scrollTrigger: { trigger: ".teachers-section", start: "top 50%"}
         });
 
         // Seminar Section
         gsap.from(".seminar-card", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: ".seminar-cta-section", start: "top 50%", markers: true }
+            scrollTrigger: { trigger: ".seminar-cta-section", start: "top 50%" }
         });
 
         // Final CTA Section
         gsap.from(".final-cta-section .stats-box, .final-cta-section .common-button", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.2,
-            scrollTrigger: { trigger: ".final-cta-section", start: "top 50%", markers: true }
+            scrollTrigger: { trigger: ".final-cta-section", start: "top 50%" }
         });
 
         // Footer
         gsap.from("footer .footer-logo, footer .footer-divider, footer .footer-content, footer .copyright", {
             opacity: 0, y: 50, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: "footer", start: "top 50%", markers: true }
+            scrollTrigger: { trigger: "footer", start: "top 50%" }
         });
 
         console.log("Page: GSAP ScrollTriggers defined.");
