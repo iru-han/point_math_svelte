@@ -263,7 +263,7 @@
     }
 
     .intro-text strong {
-        color: $primary-color;
+        color: $primary-font-color;
     }
 
     .intro-text p {
@@ -312,9 +312,9 @@
         }
 
         .card-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        h3 { font-size: 1.6em; color: $primary-color; margin-bottom: 10px; }
+        h3 { font-size: 1.6em; color: $primary-font-color; margin-bottom: 10px; }
         p { font-size: 1em; color: #666; line-height: 1.5; margin-bottom: 15px; }
-        span { font-size: 0.9em; color: $primary-color; font-weight: bold; display: block; margin-top: auto; }
+        span { font-size: 0.9em; color: $primary-font-color; font-weight: bold; display: block; margin-top: auto; }
         .card-image { width: 100px; height: auto; margin-top: 20px; align-self: flex-end; }
     }
 
@@ -333,7 +333,7 @@
     }
 
     .teachers-section .section-text { margin-bottom: 50px; }
-    .teachers-section .sub-heading { font-size: 1.1em; color: $primary-color; margin-bottom: 10px; }
+    .teachers-section .sub-heading { font-size: 1.1em; color: $primary-font-color; margin-bottom: 10px; }
     .teachers-section h2 { font-size: 2.5em; margin-bottom: 20px; line-height: 1.4; color: $primary-font-color; }
     .teachers-section strong { color: $primary-font-color; }
 
@@ -364,12 +364,12 @@
     // --- Seminar CTA Section ---
     .seminar-cta-section {
         padding: 80px 0;
-        background-color: #eef7fc;
+        background-color: $white;
         text-align: center;
     }
 
     .seminar-cta-section .section-text { margin-bottom: 50px; }
-    .seminar-cta-section .sub-heading { font-size: 1.1em; color: $primary-color; margin-bottom: 10px; }
+    .seminar-cta-section .sub-heading { font-size: 1.1em; color: $primary-font-color; margin-bottom: 10px; }
     .seminar-cta-section h2 { font-size: 2.5em; margin-bottom: 20px; line-height: 1.4; color: $primary-font-color; }
 
     .seminar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
@@ -381,7 +381,7 @@
         display: flex; flex-direction: column; justify-content: space-between; min-height: 150px;
         &:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
         h3 { font-size: 1.6em; color: $primary-font-color; margin-bottom: 15px; }
-        span { font-size: 0.9em; color: $primary-color; font-weight: bold; display: block; margin-top: auto; }
+        span { font-size: 0.9em; color: $primary-font-color; font-weight: bold; display: block; margin-top: auto; }
     }
 
     @media (max-width: 768px) {
@@ -394,14 +394,14 @@
     // --- Final CTA Section ---
     .final-cta-section {
         padding: 80px 0;
-        background-color: $primary-color;
-        color: $white;
+        background-color: $white;
+        color: $primary-font-color;
         text-align: center;
     }
 
     .final-cta-section .section-text { margin-bottom: 50px; }
     .final-cta-section h2 { font-size: 2.5em; margin-bottom: 20px; line-height: 1.4; }
-    .final-cta-section strong { color: $white; }
+    .final-cta-section strong { color: $primary-font-color; }
 
     .stats-box { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; margin-bottom: 50px; }
     .stat-item { text-align: center; }
@@ -412,7 +412,7 @@
     .common-button {
         display: inline-block; padding: 15px 40px;
         background-color: $white;
-        color: $primary-color;
+        color: $primary-font-color;
         border-radius: 5px; font-size: 1.2em; font-weight: bold;
         transition: background-color 0.3s ease, color 0.3s ease;
         &:hover { background-color: #f0f0f0; color: darken($primary-color, 10%); }

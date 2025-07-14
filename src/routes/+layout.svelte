@@ -202,7 +202,7 @@
 </footer>
 
 <style lang="scss">
-    @use '@/styles/variables.scss'; // <-- 이 줄은 삭제합니다. (vite.config.ts에서 주입)
+    @import '@/styles/variables.scss'; // <-- 이 줄은 삭제합니다. (vite.config.ts에서 주입)
 
     /* site-header 관련 스타일 */
     .site-header {
@@ -279,8 +279,8 @@
 
     /* site-footxer 관련 스타일 */
     .site-footer {
-        background-color: #1a237e; // 직접 색상 지정 (예시: 남색)
-        color: #fff; // 직접 색상 지정 (예시: 흰색)
+        background-color: $primary-color; // 직접 색상 지정 (예시: 남색)
+        color: $primary-font-color; // 직접 색상 지정 (예시: 흰색)
         padding: 50px 0;
         font-size: 14px;
         // AOS 관련 opacity/transition은 모두 제거
