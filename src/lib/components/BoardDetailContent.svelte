@@ -1,46 +1,82 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { page } from '$app/stores'; // SvelteKit page store
     import { quintOut } from 'svelte/easing';
+    // SvelteKit page store를 사용하여 URL 파라미터를 직접 읽습니다.
+    import { page } from '$app/stores'; // <-- 이 줄을 다시 추가합니다.
 
     // boardData와 인터페이스 임포트 (src/lib/data/boardData.ts에서)
     import { boardData, type BoardTypeData, type PostItem } from '$lib/data/boardData';
+    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!
 
     // 이미지 로드 에러 처리 함수 임포트
     import { handleImageError } from '$lib/utils/imageUtils';
-    import { base } from '$app/paths'; // <-- 이 줄을 추가합니다!
 
     // GSAP 관련 변수
     let gsap: any;
     let ScrollTrigger: any;
 
-    // --- 데이터 프롭스로 받기 (load 함수로부터) ---
-    export let data; // load 함수에서 반환한 { boardType, currentBoardData, currentPost } 객체를 받습니다.
+    // --- 페이지 상태 변수 ---
+    // data 프롭스 대신, 컴포넌트 내부에서 직접 currentBoardType과 currentPostIdx를 파싱하고 데이터를 찾습니다.
+    let boardType: string | null = null;
+    let currentPostIdx: number | null = null;
 
-    // 데이터 변수를 직접 data 프롭스에서 가져옵니다.
-    // $: 구문은 이 data 객체의 속성이 변경될 때마다 이 블록을 재실행합니다.
-    $: boardType = data.boardType as string; // 'notice' 또는 'recruit'
-    $: currentBoardData = data.currentBoardData as BoardTypeData; // 전체 게시판 데이터
-    $: currentPost = data.currentPost as PostItem; // 현재 게시글 상세 데이터
-
-    // 이전/다음 게시글 계산 (currentPost.idx를 기준으로)
+    let currentBoardData: BoardTypeData | null = null;
+    let currentPost: PostItem | null = null;
     let prevPost: PostItem | null = null;
     let nextPost: PostItem | null = null;
 
-    $: { // currentPostData 또는 currentPost가 변경될 때마다 재계산
-        if (currentPost && currentBoardData) { // 게시글과 게시판 데이터가 모두 있을 때만 계산
-            const allPosts = currentBoardData.posts; // 전체 게시글 목록
-            const currentIndex = allPosts.findIndex((p: PostItem) => p.idx === currentPost.idx); // 현재 게시글의 인덱스
+    // URL 파라미터 [type]과 [idx] 값의 변화에 반응하여 게시글 정보 업데이트
+    // $: {} 반응형 블록 안에서 URL 파라미터를 파싱하고 데이터 찾기
+    $: {
+        // $page.params에서 type과 idx를 직접 가져옵니다.
+        const pathSegments = $page.url.pathname.split('/').filter(s => s); // ['notice', '12736'] 또는 ['recruit', '101']
 
-            prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-            nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+        // 첫 번째 세그먼트가 'type'이 됩니다.
+        const typeFromUrl = pathSegments[0];
+        // const idxFromUrl = parseInt(pathSegments[1]);
+        const idxFromUrl = parseInt($page.params.idx);
 
-            // 페이지 타이틀 업데이트
-            if (typeof window !== 'undefined') {
-                document.title = `${currentPost.title} - 새움학원`;
+        console.log("Component: URL params - type:", typeFromUrl, "idx:", idxFromUrl); // 디버깅
+
+        if (typeFromUrl && idxFromUrl) {
+            boardType = typeFromUrl;
+            currentPostIdx = idxFromUrl;
+
+            currentBoardData = boardData[boardType] || null;
+            console.log("Component: currentBoardData found:", currentBoardData); // 디버깅
+
+            if (currentBoardData) {
+                currentPost = currentBoardData.posts.find(p => p.idx === currentPostIdx) || null;
+                console.log("Component: currentPost found:", currentPost); // 디버깅
+
+                if (currentPost) {
+                    const allPosts = currentBoardData.posts;
+                    const currentIndex = allPosts.findIndex((p: PostItem) => p.idx === currentPost?.idx);
+
+                    prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+                    nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
+                    console.log("prevPost : ", prevPost);
+                    console.log("nextPost : ", nextPost);
+
+                    if (typeof window !== 'undefined') {
+                        document.title = `${currentPost.title} - 새움학원`;
+                    }
+                } else {
+                    console.log("Component: currentPost NOT found for idx", currentPostIdx); // 디버깅
+                    // 게시글을 찾을 수 없을 때의 처리
+                }
+            } else {
+                console.log("Component: currentBoardData NOT found for type", boardType); // 디버깅
+                // 게시판 타입을 찾을 수 없을 때의 처리
             }
         } else {
-            // 강사를 찾을 수 없거나 데이터가 불완전할 때 페이지 타이틀 설정
+            console.log("Component: Invalid URL params - type or idx missing."); // 디버깅
+            // URL 파라미터가 유효하지 않을 때의 처리
+        }
+
+        // 데이터가 없으면 페이지 타이틀도 적절히 설정 (여기서도 실행)
+        if (!currentBoardData || !currentPost) {
             if (typeof window !== 'undefined') {
                 document.title = '게시글을 찾을 수 없음 - 새움학원';
             }
@@ -55,6 +91,9 @@
                 gsap.from(".post-header", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out" });
                 gsap.from(".post-body", { opacity: 0, y: 30, duration: 0.8, delay: 0.2, ease: "power2.out" });
                 gsap.from(".post-nav, .list-button-wrap", { opacity: 0, y: 20, duration: 0.8, delay: 0.4, ease: "power2.out" });
+            } else {
+                // 게시글이 없을 때도 애니메이션이 작동하지 않도록 방지
+                console.warn("GSAP animations skipped: currentPost is null.");
             }
             console.log("Board Detail Page: GSAP animations defined.");
         });

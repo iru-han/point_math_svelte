@@ -70,7 +70,7 @@
     onDestroy(() => {
         if (ScrollTrigger) {
             ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
-            ScrollTrigger.clear();
+            // ScrollTrigger.clear();
             console.log("Board Page: All ScrollTriggers killed.");
         }
     });

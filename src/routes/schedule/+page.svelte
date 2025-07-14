@@ -124,7 +124,7 @@
     onDestroy(() => {
         if (ScrollTrigger) {
             ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
-            ScrollTrigger.clear();
+            // ScrollTrigger.clear();
             console.log("Schedule Page: All ScrollTriggers killed.");
         }
     });
